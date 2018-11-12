@@ -1,3 +1,13 @@
+/node_modules
+/vendor
+composer.lock
+package-lock.json
+npm-debug.log
+yarn-error.log
+.env
+/.idea
+/.vscode
+.svn
 .*.swp
 .*.swo
 ._*
@@ -8,8 +18,6 @@
 /debug/
 /upload/
 /avatar/
-/.idea/
-.svn/
 *.orig
 *.aps
 *.APS

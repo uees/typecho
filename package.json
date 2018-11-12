@@ -1,0 +1,22 @@
+{
+  "name": "typecho",
+  "version": "1.0.0",
+  "description": "Typecho Blogging Platform =========================",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/uees/typecho.git"
+  },
+  "author": "wan",
+  "license": "GPL",
+  "bugs": {
+    "url": "https://github.com/uees/typecho/issues"
+  },
+  "homepage": "https://github.com/uees/typecho#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1"
+  }
+}
