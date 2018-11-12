@@ -1,0 +1,4 @@
+https://katex.org/
+
+https://cdn.staticfile.org/KaTeX/0.10.0-rc.1/katex.min.css
+https://cdn.staticfile.org/KaTeX/0.10.0-rc.1/katex.min.js
