@@ -26,9 +26,24 @@ class Widget_Abstract_Comments extends Widget_Abstract
      */
     protected function ___parentContent()
     {
-        return $this->db->fetchRow($this->widget('Widget_Abstract_Contents')->select()
-        ->where('table.contents.cid = ?', $this->cid)
-        ->limit(1), array($this->widget('Widget_Abstract_Contents'), 'filter'));
+        $result = $this->db->fetchRow(
+            $this->widget('Widget_Abstract_Contents')->select()
+                ->where('table.contents.cid = ?', $this->cid)
+                ->limit(1), array($this->widget('Widget_Abstract_Contents'), 'filter')
+        );
+
+        if (empty($result)) {
+            // 设置默认字段
+            $result = [
+                'title' => null,
+                'cid' => null,
+                'pathinfo' => null,
+                'permalink' => null,
+                'hidden' => false,
+            ];
+        }
+
+        return $result;
     }
 
     /**
