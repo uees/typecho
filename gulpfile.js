@@ -1,12 +1,19 @@
-const {src, dest, series} = require('gulp');
+const {src, dest, series, parallel} = require('gulp');
 const cleanCss = require('gulp-clean-css'); // 压缩CSS
 const rename = require('gulp-rename');  // 设置压缩后的文件名
 const autoprefixer = require('gulp-autoprefixer');  // 给 CSS 增加前缀。解决某些CSS属性不是标准属性，有各种浏览器前缀的情况
 const rev = require('gulp-rev');
 const jeditor = require("gulp-json-editor");
 const sass = require("gulp-sass");
+const babel = require('gulp-babel');
+const uglify = require('gulp-uglify');
+const browserify = require('browserify');
+const babelify = require('babelify');
+const standalonify = require('standalonify');
+const source = require('vinyl-source-stream');
+const buffer = require('vinyl-buffer');
 
-function bundleCss(cb) {
+function bundleCss() {
     return src('usr/themes/default/src/css/main.scss')
         .pipe(sass())
         .pipe(cleanCss()) // 压缩css
@@ -19,12 +26,30 @@ function bundleCss(cb) {
         }))
         .pipe(rename('style.min.css')) // 设置压缩文件名
         .pipe(dest('usr/themes/default/')) // 输出文件的存放地址
-        .pipe(rev())  // 添加 hash
-        .pipe(rev.manifest({  // 生成 manifest
-            merge: true,
-        }))
-        .pipe(dest('usr/themes/default/')) // manifest 的存放地址
 
+}
+
+function bundleJs() {
+    // 创建 Browserify 实例
+    return browserify({
+        entries: 'usr/themes/default/src/js/main.js',  //指定打包入口文件
+    })
+        .plugin(standalonify, {
+            name: 'Typecho'
+        }) // 使打包后的js文件符合UMD规范
+        .transform(babelify)  // babel 转化 es6 (配合.babelrc)
+        .bundle() //合并打包
+        .pipe(source('app.min.js')) // 将常规流转换为包含Stream的vinyl对象，并且重命名
+        .pipe(buffer()) // 将vinyl对象内容中的Stream转换为Buffer
+        .pipe(uglify())
+        .pipe(dest('usr/themes/default/'))
+}
+
+function manifest() {
+    return src(['usr/themes/default/app.min.js', 'usr/themes/default/style.min.css'])
+        .pipe(rev())  // 添加 hash
+        .pipe(rev.manifest()) // 生成 manifest
+        .pipe(dest('usr/themes/default/'))  // manifest 的存放地址
 }
 
 function modifyManifest() {
@@ -38,4 +63,8 @@ function modifyManifest() {
         .pipe(dest('usr/themes/default/')) // manifest 的存放地址
 }
 
-exports.default = series(bundleCss, modifyManifest);
+exports.default = series(
+    parallel(bundleCss, bundleJs),
+    manifest,
+    modifyManifest
+);

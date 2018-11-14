@@ -36,3 +36,4 @@ config.rb
 /usr/uploads/
 /usr/*.db
 /zues.pub.txt
+.gulp-scss-cache

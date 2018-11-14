@@ -11,5 +11,6 @@
 </footer><!-- end #footer -->
 
 <?php $this->footer(); ?>
+<script src="<?php mix('app.min.js', $this->options) ?>"></script>
 </body>
 </html>

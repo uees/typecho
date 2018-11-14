@@ -14,7 +14,7 @@
         ), '', ' - '); ?><?php $this->options->title(); ?></title>
 
     <!-- 使用url函数转换相关路径 -->
-    <link rel="stylesheet" href="<?php $this->options->themeUrl('style.min.css'); ?>">
+    <link rel="stylesheet" href="<?php mix('style.min.css', $this->options); ?>">
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <!--[if lt IE 9]>
