@@ -81,7 +81,7 @@ if (!function_exists('mix')) {
             throw new Exception("Unable to locate Mix file: {$path}.");
         }
 
-        $appendPath =  $path . '?' . $manifest[$path];
+        $appendPath =  $path . '?id=' . $manifest[$path];
 
         $options->themeUrl($appendPath);
     }

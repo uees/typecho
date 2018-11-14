@@ -12,5 +12,12 @@
 
 <?php $this->footer(); ?>
 <script src="<?php mix('app.min.js', $this->options) ?>"></script>
+<script src="https://cdn.staticfile.org/KaTeX/0.10.0/katex.min.js" defer></script>
+<script src="https://cdn.staticfile.org/KaTeX/0.10.0/contrib/auto-render.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body);
+    });
+</script>
 </body>
 </html>

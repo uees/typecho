@@ -15,6 +15,7 @@
 
     <!-- 使用url函数转换相关路径 -->
     <link rel="stylesheet" href="<?php mix('style.min.css', $this->options); ?>">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/KaTeX/0.10.0/katex.min.css">
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <!--[if lt IE 9]>
