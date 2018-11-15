@@ -6,6 +6,7 @@ if (!defined('__TYPECHO_ADMIN__')) {
 $header = '<link rel="stylesheet" href="' . Typecho_Common::url('normalize.css?v=' . $suffixVersion, $options->adminStaticUrl('css')) . '">
 <link rel="stylesheet" href="' . Typecho_Common::url('grid.css?v=' . $suffixVersion, $options->adminStaticUrl('css')) . '">
 <link rel="stylesheet" href="' . Typecho_Common::url('style.css?v=' . $suffixVersion, $options->adminStaticUrl('css')) . '">
+<link rel="stylesheet" href="https://cdn.staticfile.org/KaTeX/0.10.0/katex.min.css">
 <!--[if lt IE 9]>
 <script src="' . Typecho_Common::url('html5shiv.js?v=' . $suffixVersion, $options->adminStaticUrl('js')) . '"></script>
 <script src="' . Typecho_Common::url('respond.js?v=' . $suffixVersion, $options->adminStaticUrl('js')) . '"></script>
@@ -24,7 +25,6 @@ $header = Typecho_Plugin::factory('admin/header.php')->header($header);
         <title><?php _e('%s - %s - Powered by Typecho', $menu->title, $options->title); ?></title>
         <meta name="robots" content="noindex, nofollow">
         <?php echo $header; ?>
-		<link rel="stylesheet" href="https://cdn.staticfile.org/KaTeX/0.10.0/katex.min.css">
     </head>
     <body<?php if (isset($bodyClass)) {echo ' class="' . $bodyClass . '"';} ?>>
     <!--[if lt IE 9]>

@@ -3,6 +3,8 @@
 <script src="<?php $options->adminStaticUrl('js', 'hyperdown.js?v=' . $suffixVersion); ?>"></script>
 <script src="<?php $options->adminStaticUrl('js', 'pagedown.js?v=' . $suffixVersion); ?>"></script>
 <script src="<?php $options->adminStaticUrl('js', 'paste.js?v=' . $suffixVersion); ?>"></script>
+<script src="https://cdn.staticfile.org/KaTeX/0.10.0/katex.min.js" defer></script>
+<script src="https://cdn.staticfile.org/KaTeX/0.10.0/contrib/auto-render.min.js" defer></script>
 <script>
 $(document).ready(function () {
     var textarea = $('#text'),
@@ -64,7 +66,7 @@ $(document).ready(function () {
     // 自动跟随
     converter.enableHtml(true);
     converter.enableLine(true);
-    reloadScroll = scrollableEditor(textarea, preview);
+    var reloadScroll = scrollableEditor(textarea, preview);
 
     // 修正白名单
     converter.hook('makeHtml', function (html) {
@@ -81,7 +83,7 @@ $(document).ready(function () {
 
         // 替换block
         html = html.replace(/<(iframe|embed)\s+([^>]*)>/ig, function (all, tag, src) {
-            if (src[src.length - 1] == '/') {
+            if (src[src.length - 1] === '/') {
                 src = src.substring(0, src.length - 1);
             }
 
@@ -93,15 +95,16 @@ $(document).ready(function () {
     });
 
     editor.hooks.chain('onPreviewRefresh', function () {
-        var images = $('img', preview), count = images.length;
+        var images = $('img', preview),
+            count = images.length;
 
-        if (count == 0) {
+        if (count === 0) {
             reloadScroll(true);
         } else {
             images.bind('load error', function () {
                 count --;
 
-                if (count == 0) {
+                if (count === 0) {
                     reloadScroll(true);
                 }
             });
@@ -193,8 +196,9 @@ $(document).ready(function () {
                 selected_el = $(selected_tab).removeClass("wmd-hidetab");
 
             // 预览时隐藏编辑器按钮
-            if (selected_tab == "#wmd-preview") {
+            if (selected_tab === "#wmd-preview") {
                 $("#wmd-button-row").addClass("wmd-visualhide");
+                renderMathInElement(document.body);
             } else {
                 $("#wmd-button-row").removeClass("wmd-visualhide");
             }
@@ -207,7 +211,7 @@ $(document).ready(function () {
 
         // 剪贴板复制图片
         textarea.pastableTextarea().on('pasteImage', function (e, data) {
-            name = data.name.replace(/[\(\)\[\]\*#!]/g, '');
+            var name = data.name.replace(/[\(\)\[\]\*#!]/g, '');
             if (!name.match(/\.[a-z0-9]{2,}$/i)) {
                 var ext = data.blob.type.split('/').pop();
                 name += '.' + ext;
