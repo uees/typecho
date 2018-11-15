@@ -2176,3 +2176,15 @@ div.token-input-dropdown ul li.token-input-selected-dropdown-item {
 /* line 44, ../scss/_hidden.scss */
 .invisible {
   visibility: hidden; }
+
+/* fix KaTex display error */
+.container, .row [class*="col-align-"] {
+  box-sizing: inherit;
+}
+
+.row [class*="col-align-"] {
+  float: none;
+  min-height: auto;
+  padding-right: 0;
+  padding-left: 0;
+}
