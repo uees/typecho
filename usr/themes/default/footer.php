@@ -16,7 +16,12 @@
 <script src="https://cdn.staticfile.org/KaTeX/0.10.0/contrib/auto-render.min.js" defer></script>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        renderMathInElement(document.body);
+        renderMathInElement(document.body, {
+            'delimiters': [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false}
+            ]
+        });
     });
 </script>
 </body>

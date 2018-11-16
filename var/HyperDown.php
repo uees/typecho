@@ -308,7 +308,7 @@ class HyperDown
     /**
      * @param array $lines
      * @param $start
-     * @return string
+     * @return array
      */
     public function markLines(array $lines, $start)
     {

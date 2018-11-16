@@ -198,7 +198,12 @@ $(document).ready(function () {
             // 预览时隐藏编辑器按钮
             if (selected_tab === "#wmd-preview") {
                 $("#wmd-button-row").addClass("wmd-visualhide");
-                renderMathInElement(document.body);
+                renderMathInElement(document.body, {
+                    'delimiters': [
+                        {left: "$$", right: "$$", display: true},
+                        {left: "$", right: "$", display: false}
+                    ]
+                });
             } else {
                 $("#wmd-button-row").removeClass("wmd-visualhide");
             }
