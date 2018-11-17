@@ -38,19 +38,6 @@ if (!function_exists('startsWith')) {
     }
 }
 
-if (!function_exists('startsWith')) {
-    function startsWith($haystack, $needles)
-    {
-        foreach ((array)$needles as $needle) {
-            if ($needle !== '' && substr($haystack, 0, strlen($needle)) === (string)$needle) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-}
-
 if (!function_exists('mix')) {
     /**
      * Get the path to a versioned Mix file.
